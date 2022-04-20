@@ -1,0 +1,8 @@
+.content {
+  z-index: 2;
+  position: relative;
+  background-color: white;
+  color: black;
+  text-align: center;
+  height: 100vh;
+}

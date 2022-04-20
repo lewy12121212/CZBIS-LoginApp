@@ -12,8 +12,8 @@ function App() {
         <Route path="/" element={<Outlet />}>
           <Route path="/Login" element={<Login />} />
           <Route path="/HomePage" element={<HomePage />} />
-          <Route path="/Page404" element={<Page404 />} />
           <Route path="/Unautorize" element={<Unautorize />} />
+          <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
     </BrowserRouter>

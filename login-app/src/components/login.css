@@ -1,0 +1,40 @@
+.app-vertical-center {
+  z-index: 2;
+  position: relative;
+  top: 40vh;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.login-main {
+  border-radius: 10px;
+}
+
+.login-title {
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  color: #5c5c5c;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.login-title h3 {
+  margin: 0px;
+}
+
+.login-content {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.login-content input {
+  padding: 10px;
+  margin-top: 20px;
+}
