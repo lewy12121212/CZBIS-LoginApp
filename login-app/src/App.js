@@ -10,9 +10,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Outlet />}>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/HomePage" element={<HomePage />} />
-          <Route path="/Unautorize" element={<Unautorize />} />
+          <Route path="" exac element={<Login />} />
+          <Route path="HomePage" element={<HomePage />} />
+          <Route path="Unautorize" element={<Unautorize />} />
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
