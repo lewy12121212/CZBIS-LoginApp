@@ -5,11 +5,12 @@ import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import axios from 'axios';
 import { setUserSession } from '../utils/session';
-//import {withRouter} from 'react-router-dom';
+import Unautorize from './Unautorize'
 
 export default function Login(props) {
   const [login, setLogin] = useState('')
   const [pwd, setPwd] = useState('')
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogin = () => {
     axios.post(`http://localhost:4000/login`, { login: login, pwd: pwd }).then(response => {
@@ -18,6 +19,7 @@ export default function Login(props) {
         window.location = '/HomePage';
       } else {
         setUserSession(response.data.token)
+        setShowModal(true);
       }
     }).catch(error => {
       console.log(error)
@@ -54,6 +56,7 @@ export default function Login(props) {
           </div>
         </div>
       </div>
+      {showModal && <Unautorize showModal={showModal} setShowModal={setShowModal}></Unautorize>}
     </div>
   );
 }

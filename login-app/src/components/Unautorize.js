@@ -1,15 +1,14 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
 
-export default function Unautorize() {
-  const [show, setShow] = useState(true);
+export default function Unautorize(props) {
 
-  const handleClose = () => setShow(false);
-  //const handleShow = () => setShow(true);
+  const handleClose = () => {
+    props.setShowModal(false)
+  }
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={props.showModal} onHide={handleClose}>
       <Modal.Header>
         <Modal.Title>Błąd autoryzacji</Modal.Title>
       </Modal.Header>
