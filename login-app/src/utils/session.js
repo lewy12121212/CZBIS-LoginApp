@@ -3,7 +3,8 @@ export const setUserSession = (token, user) => {
 }
 
 export const getToken = () => {
-  return localStorage.getItem('token') || null;
+  if(localStorage.getItem('token') !== null) return true;
+  return false;
 }
 
 export const removeUserSession = () => {

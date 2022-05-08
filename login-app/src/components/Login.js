@@ -7,7 +7,7 @@ import axios from 'axios';
 import { setUserSession } from '../utils/session';
 import Unautorize from './Unautorize'
 
-export default function Login(props) {
+export default function Login() {
   const [login, setLogin] = useState('')
   const [pwd, setPwd] = useState('')
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +18,6 @@ export default function Login(props) {
         setUserSession(response.data.token)
         window.location = '/HomePage';
       } else {
-        setUserSession(response.data.token)
         setShowModal(true);
       }
     }).catch(error => {

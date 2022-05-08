@@ -56,7 +56,6 @@ app.post('/login', (req, res) => {
   const sqlQuery = "Select * from Users where Login like (?) and Password like (?)";
 
   db.query(sqlQuery, [login, pwd], (err, result) => {
-    console.log(result)
     if(err) res.send(err)
     else if(result.length === 0) res.json({
       auth: false,
