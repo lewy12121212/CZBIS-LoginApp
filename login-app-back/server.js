@@ -27,6 +27,8 @@ const generateToken = () => {
 
 app.use(cors())
 app.use(bodyParser.json());
+
+// starting the server
 app.listen( server.port , () => console.log(`Server started, listening port: ${server.port}`))
 
 app.get('/', (req, res) => {
