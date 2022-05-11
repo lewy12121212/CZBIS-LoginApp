@@ -1,16 +1,18 @@
-const express = require('express'),
-  app = express(),
-  cors = require('cors'),
-  mysql = require('mysql'),
-  bodyParser = require('body-parser');
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const mysql = require('mysql')
+const bodyParser = require('body-parser')
 
-// make server object that contain port property and the value for our server.
 var server = {
   port: 4000
 };
-// use the modules
+
 app.use(cors())
 app.use(bodyParser.json());
+
+// starting the server
+app.listen( server.port , () => console.log(`Server started, listening port: ${server.port}`));
 
 // setup database
 db = mysql.createConnection({
@@ -39,6 +41,3 @@ app.get('/usersList', (req, res) => {
       res.send(result)
   })
 });
-
-// starting the server
-app.listen( server.port , () => console.log(`Server started, listening port: ${server.port}`));
