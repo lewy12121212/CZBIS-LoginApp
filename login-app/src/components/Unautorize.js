@@ -6,7 +6,6 @@ export default function Unautorize() {
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
-  //const handleShow = () => setShow(true);
 
   return (
     <Modal show={show} onHide={handleClose}>
