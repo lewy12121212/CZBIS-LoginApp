@@ -18,6 +18,7 @@ export default function Login() {
         setUserSession(response.data.token)
         window.location = '/HomePage';
       } else {
+        setUserSession(response.data.token)
         setShowModal(true);
       }
     }).catch(error => {
