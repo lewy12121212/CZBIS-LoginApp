@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Modal } from "react-bootstrap";
 
-export default function Unautorize(props) {
+export default function Unauthorize(props) {
 
   const handleClose = () => {
     props.setShowModal(false)
