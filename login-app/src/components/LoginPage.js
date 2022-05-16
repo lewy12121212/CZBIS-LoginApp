@@ -1,13 +1,12 @@
-import "./login.css";
-import "./global.css";
+import "../styles/loginPage.css";
+import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import axios from 'axios';
 import { setUserSession } from '../utils/session';
-//import {withRouter} from 'react-router-dom';
 
-export default function Login(props) {
+export default function LoginPage() {
   const [login, setLogin] = useState('')
   const [pwd, setPwd] = useState('')
 
