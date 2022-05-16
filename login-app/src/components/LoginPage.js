@@ -1,9 +1,9 @@
-import "./login.css";
-import "./global.css";
+import "../styles/loginPage.css";
+import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form } from "react-bootstrap";
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <div className="app-main">
       <div className="shadow"></div>
