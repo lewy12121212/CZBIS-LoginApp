@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
 
-export default function Login() {
+export default function Unauthorize() {
   return (
     <div>
-      Login
+      Unautorize
     </div>
   );
 }

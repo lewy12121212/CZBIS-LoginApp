@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
 
-export default function Page404() {
+export default function ErrorPage() {
   return (
     <div>
-      Page404
+      ErrorPage
     </div>
   );
 }
