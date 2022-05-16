@@ -1,5 +1,5 @@
-import "./homePage.css";
-import "./global.css";
+import "../styles/homePage.css";
+import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Navbar, Button } from "react-bootstrap";
 

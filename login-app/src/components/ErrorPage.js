@@ -1,8 +1,8 @@
-import "./page404.css";
-import "./global.css";
+import "../styles/errorPage.css";
+import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-export default function Page404() {
+export default function ErrorPage() {
   return (
     <div className="app-main">
       <div className="shadow"></div>
