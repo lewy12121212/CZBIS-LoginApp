@@ -64,6 +64,7 @@ app.post('/login', (req, res) => {
       token: null})
     else res.json({
       auth: true,
+      userData: JSON.stringify({"Name": result[0].Name, "Surname": result[0].Surname}),
       token: generateToken()})
   })
 });

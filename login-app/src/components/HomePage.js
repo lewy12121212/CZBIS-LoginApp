@@ -2,14 +2,20 @@ import "../styles/homePage.css";
 import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Navbar, Button } from "react-bootstrap";
-import { removeUserSession } from '../utils/session';
+import { getUserData, removeUserSession } from '../utils/session';
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [userData, setUserData] = useState('');
 
   const handleLogout = () => {
     removeUserSession()
     window.location = '/';
   }
+
+  useEffect(() => {
+    setUserData(JSON.parse(getUserData()));
+  }, [])
 
   return (
     <div className="app-main">
@@ -23,7 +29,7 @@ export default function HomePage() {
             </Container>
           </Navbar>
           <div>
-            Dane użytkownika:
+            Dane użytkownika: {userData.Name} {userData.Surname}
           </div>
         </div>
       </div>

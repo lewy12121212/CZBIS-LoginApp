@@ -14,11 +14,11 @@ export default function LoginPage() {
 
   const handleLogin = () => {
     axios.post(`http://localhost:4000/login`, { login: login, pwd: pwd }).then(response => {
-      if(response.data.auth){
-        setUserSession(response.data.token)
+      if (response.data.auth) {
+        setUserSession(response.data.token, response.data.userData)
         window.location = '/HomePage';
       } else {
-        setUserSession(response.data.token)
+        // setUserSession(response.data.token)
         setShowModal(true);
       }
     }).catch(error => {
