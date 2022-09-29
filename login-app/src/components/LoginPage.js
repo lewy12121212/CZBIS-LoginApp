@@ -2,15 +2,17 @@ import "../styles/loginPage.css";
 import "../styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
-import { setUserSession } from '../utils/session';
-import Unauthorize from './Unauthorize'
+import { getToken, getUserData, setUserSession } from '../utils/session';
+import Unauthorize from './Unauthorize';
+import md5 from 'md5';
 
 export default function LoginPage() {
   const [login, setLogin] = useState('')
   const [pwd, setPwd] = useState('')
   const [showModal, setShowModal] = useState(false);
+  const [userData] = useState(JSON.parse(getUserData()));
 
   const handleLogin = () => {
     axios.post(`http://localhost:4000/login`, { login: login, pwd: pwd }).then(response => {
@@ -25,6 +27,21 @@ export default function LoginPage() {
       console.log(error)
     });
   }
+
+  const checkToken = (login, password) => {
+    const token = getToken();
+    const tokenMd5 = md5(login + password);
+    console.log('md5: ' + tokenMd5);
+    console.log(token )
+    if(token === tokenMd5) return true;
+    return false;
+  }
+
+  useEffect(() => {
+    if(checkToken(userData.Login, userData.Password)){
+      window.location = '/HomePage';
+    }
+  }, [userData])
 
   return (
     <div className="app-main">
