@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
+const md5 = require('md5')
 
 //server settings
 var server = {
@@ -17,12 +18,8 @@ db = mysql.createConnection({
   database: 'DB_LoginApp'
 })
 
-const generateToken = () => {
-  let token = ''
-  for(let i = 0; i < 80; i++){
-    token += String.fromCharCode(0 + parseInt(Math.floor(Math.random() * (127 - 33 + 1) + 33)))
-  }
-  return token
+const generateToken = (login, password) => {
+  return md5(login + password);
 }
 
 app.use(cors())
@@ -64,8 +61,15 @@ app.post('/login', (req, res) => {
       token: null})
     else res.json({
       auth: true,
-      userData: JSON.stringify({"Name": result[0].Name, "Surname": result[0].Surname}),
-      token: generateToken()})
+      userData: JSON.stringify({
+        "Name": result[0].Name, 
+        "Surname": result[0].Surname,
+        "Login": result[0].Login,
+        "Password": result[0].Password,
+      }),
+      token: generateToken(result[0].Login, result[0].Password)})
   })
 });
+
+
 

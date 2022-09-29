@@ -4,7 +4,8 @@ export const setUserSession = (token, user) => {
 }
 
 export const getToken = () => {
-  if(localStorage.getItem('token') !== null) return true;
+  const token = localStorage.getItem('token');
+  if(token !== null) return token;
   return false;
 }
 
@@ -16,4 +17,5 @@ export const getUserData = () => {
 
 export const removeUserSession = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('user');
 }
