@@ -35,31 +35,47 @@ app.get('/', (req, res) => {
 app.get('/dbTest', (req, res) => { 
   const sqlQuery = "SHOW TABLES"
   db.query(sqlQuery, (err, result) => {
+    if(!err){
       console.log(result)
-      res.send(result)
+      res.status(200).send(result)
+    } else {
+      res.status(404).send(err)
+    }
+    
   })
 });
 
 app.get('/usersList', (req, res) => { 
   const sqlQuery = "Select * from Users";
   db.query(sqlQuery, (err, result) => {
+    if(!err){
       console.log(result)
-      res.send(result)
+      res.status(200).send(result)
+    } else {
+      res.status(404).send(err)
+    }
+
   })
 });
-
+   
 app.post('/login', (req, res) => { 
   const login = req.body.login
   const pwd = req.body.pwd
 
-  const sqlQuery = "Select * from Users where Login like (?) and Password like (?)";
+  const sqlQuery = "Select * from Users where Login = (?) and Password = (?)";
 
   db.query(sqlQuery, [login, pwd], (err, result) => {
-    if(err) res.send(err)
-    else if(result.length === 0) res.json({
+    if(err) res.status(404).send(err)
+    else if(result.length === 0) res.status(401).json({
       auth: false,
       token: null})
-    else res.json({
+    else if(login !== result[0].Login || pwd !== result[0].Password){
+      res.status(401).json({
+        auth: false,
+        token: null
+      })
+    } 
+    else res.status(200).json({
       auth: true,
       userData: JSON.stringify({
         "Name": result[0].Name, 
@@ -72,4 +88,16 @@ app.post('/login', (req, res) => {
 });
 
 
+app.post('/registration', (req, res) => {
+  const name = req.body.name
+  const surname = req.body.surname
+  const login = req.body.login
+  const pwd = req.body.pwd
 
+  const sqlQuery = "INSERT INTO users (Name, Surname, Login, Password) VALUES (?, ?, ?, ?)";
+
+  db.query(sqlQuery, [name, surname, login, pwd], (err, result) => {
+    if(err) res.status(404).send(err);
+    else res.status(200).send('OK')
+  })
+});

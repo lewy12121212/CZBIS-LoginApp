@@ -9,41 +9,29 @@ import { getToken, getUserData, setUserSession } from '../utils/session';
 import Unauthorize from './Unauthorize';
 import md5 from 'md5';
 
-export default function LoginPage() {
+export default function RegistrationPage() {
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
   const [login, setLogin] = useState('')
   const [pwd, setPwd] = useState('')
-  const [showModal, setShowModal] = useState(false);
-  const [userData] = useState(JSON.parse(getUserData()));
+  const [info, setInfo] = useState({
+    show: false,
+    msg: ''
+  });
 
   const handleLogin = () => {
-    axios.post(`http://localhost:4000/login`, { login: login, pwd: pwd }).then(response => {
-      if (response.data.auth) {
-        setUserSession(response.data.token, response.data.userData)
-        window.location = '/HomePage';
-      } else {
-        // setUserSession(response.data.token)
-        setShowModal(true);
-      }
+    axios.post(`http://localhost:50/registration`, { name: name, surname: surname, login: login, pwd: pwd }).then(response => {
+      setInfo({
+        show: true,
+        msg: 'Udało się zarejestrować'
+      })
     }).catch(error => {
-      console.log(error)
-      setShowModal(true);
+      setInfo({
+        show: true,
+        msg: 'Błąd rejestracji'
+      })
     });
   }
-
-  const checkToken = (login, password) => {
-    const token = getToken();
-    const tokenMd5 = md5(login + password);
-    console.log('md5: ' + tokenMd5);
-    console.log(token )
-    if(token === tokenMd5) return true;
-    return false;
-  }
-
-  useEffect(() => {
-    if(checkToken(userData.Login, userData.Password)){
-      window.location = '/HomePage';
-    }
-  }, [userData])
 
   return (
     <div className="app-main">
@@ -51,7 +39,7 @@ export default function LoginPage() {
       <div className="app-vertical-center container">
         <div className="login-main col-10 col-sm-8 col-md-8 col-lg-4">
           <div className="login-title">
-            <h3>Zaloguj do serwisu</h3>
+            <h3>Zarejestruj</h3>
           </div>
           <div className="login-content">
             <form className="login-form">
@@ -59,8 +47,20 @@ export default function LoginPage() {
               <Form.Control
                 type="text"
                 className="form-control"
-                placeholder="Login"
+                placeholder="Imię"
                 style={{ marginTop: "0px" }}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Form.Control
+                type="text"
+                className="form-control"
+                placeholder="Nazwisko"
+                onChange={(e) => setSurname(e.target.value)}
+              />
+              <Form.Control
+                type="text"
+                className="form-control"
+                placeholder="Login"
                 onChange={(e) => setLogin(e.target.value)}
               />
               <Form.Control
@@ -70,17 +70,17 @@ export default function LoginPage() {
                 onChange={(e) => setPwd(e.target.value)}
               />
               <Button className="w-100" style={{ marginTop: "20px" }} onClick={handleLogin}>
-                Zaloguj
+                Zarejestruj
               </Button>
             </form>
+            {info.show && info.msg}
           </div>
+          <div style={{color: 'white'}}>
+          {name} {surname} {login} {pwd}
+          </div>
+         
         </div>
       </div>
-      {showModal && 
-      <Unauthorize 
-        showModal={showModal} 
-        setShowModal={setShowModal} 
-      />}
     </div>
   );
 }

@@ -4,5 +4,5 @@
   background-color: white;
   color: black;
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
 }

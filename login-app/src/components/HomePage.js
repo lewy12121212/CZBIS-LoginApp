@@ -5,6 +5,7 @@ import { Container, Navbar, Button } from "react-bootstrap";
 import { getToken, getUserData, removeUserSession } from '../utils/session';
 import { useEffect, useState } from "react";
 import md5 from "md5";
+import HomePageContent from "./HomePageContent";
 
 export default function HomePage() {
   const [userData] = useState(JSON.parse(getUserData()));
@@ -43,6 +44,7 @@ export default function HomePage() {
           <div>
             Dane użytkownika: {userData.Name} {userData.Surname}
           </div>
+          <HomePageContent />
         </div>
       </div>
     </div>
